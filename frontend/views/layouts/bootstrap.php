@@ -1,9 +1,12 @@
 <?
+use \yii\bootstrap\Html;
+
     \frontend\assets\MainAsset::register($this);
 ?>
 
 <meta charset="<?= Yii::$app->charset ?>">
-<?= \yii\bootstrap\Html::csrfMetaTags() // Отправка какого то кода при приеме формы?>
+<?= Html::csrfMetaTags() // Отправка какого то кода при приеме формы ?>
+<? $this->head() // здесь будут подключаться все js и css файлы ?>
 
 
 <? $this->beginPage() ?>
