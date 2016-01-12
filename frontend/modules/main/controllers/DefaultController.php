@@ -24,6 +24,6 @@ class DefaultController extends Controller
         // @vendor - указывает путь до папки vendor'а
         // @bower - до bower'а из папки vendor
         // @npm - лежит в папке vendor
-        // 
+        //
     }
 }
