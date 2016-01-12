@@ -15,7 +15,13 @@ class MainController extends \yii\web\Controller
         //$this->layout = "bootstrap";
 
         //return $this->render('index', ['urlImage' => $urlImage]);
-        return $this->render('index');
+        //print \Yii::getAlias('@webroot');
+
+        //return $this->render('index');
+
+        echo '3 vidio 28:18';
+
+        return $this->render('inner');
     }
 
     /**

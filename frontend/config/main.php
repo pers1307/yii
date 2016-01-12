@@ -6,6 +6,8 @@ $params = array_merge(
     require(__DIR__ . '/params-local.php')
 );
 
+Yii::setAlias('@test', '@frontend/test');
+
 return [
     'id' => 'app-my-frontend',
     'basePath' => dirname(__DIR__),
@@ -34,10 +36,16 @@ return [
                 'password'   => '', // ну и пароль соответственно
             ],
         ],
+
+        'common' => [
+            'class' => 'frontend\components\Common',
+        ],
+
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
         ],
+
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -47,8 +55,24 @@ return [
                 ],
             ],
         ],
+
         'errorHandler' => [
             'errorAction' => 'site/error',
+        ],
+
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            //'enableStrictParsing' => true,
+            /*
+            'rules' => [
+                [
+                    'pattern' => '<controller>/<action>',
+                    'route'   => '<controller>/<action>',
+                    'suffix'  => '.html'
+                ],
+            ]
+            */
         ],
     ],
     'params' => $params,
