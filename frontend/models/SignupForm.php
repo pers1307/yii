@@ -13,6 +13,7 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
+    public $repassword;
 
     /**
      * @inheritdoc
@@ -21,8 +22,8 @@ class SignupForm extends Model
     {
         return [
             ['username', 'filter', 'filter' => 'trim'],
-            ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+            [['username', 'password'], 'required'],
+            ['username', 'unique', 'targetClass' => '\common\models\User', /*'tergetAttribute' => 'nickname',*/'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'filter', 'filter' => 'trim'],
@@ -33,6 +34,9 @@ class SignupForm extends Model
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
+            ['repassword', 'required'],
+            ['repassword', 'compare', 'compareAttribute' => 'password'],
+
         ];
     }
 
