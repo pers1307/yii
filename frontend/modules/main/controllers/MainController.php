@@ -4,6 +4,7 @@ namespace app\modules\main\controllers;
 
 use frontend\models\Image;
 use frontend\models\SignupForm;
+use yii\widgets\ActiveForm;
 
 class MainController extends \yii\web\Controller
 {
@@ -21,7 +22,7 @@ class MainController extends \yii\web\Controller
 
         //return $this->render('index');
 
-        echo '3 vidio 47:01';
+        echo '3 vidio 58:10';
 
         return $this->render('inner');
     }
@@ -29,7 +30,13 @@ class MainController extends \yii\web\Controller
     // http://yii.loc/frontend/web/main/main/register
     public function actionRegister()
     {
-        $model = new SignupForm();
+        $model = new SignupForm;
+
+        if (\Yii::$app->request->isAjax && \Yii::$app->request->isPost) {
+            \Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
+
         if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
 
             print_r($model->getAttributes());
@@ -37,6 +44,11 @@ class MainController extends \yii\web\Controller
 
         }
         return $this->render('register', ['model' => $model]);
+    }
+
+    public function actionContact()
+    {
+
     }
 
     /**

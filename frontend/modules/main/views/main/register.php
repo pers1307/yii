@@ -1,7 +1,10 @@
 
 
 <?
-    $form = \yii\bootstrap\ActiveForm::begin();
+    $form = \yii\bootstrap\ActiveForm::begin([
+        'enableClientValidation' => false, // Валидация происходит после попытки отправки формы
+        'enableAjaxValidation' => true
+    ]);
 
 ?>
 <form>
