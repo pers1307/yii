@@ -27,13 +27,13 @@ class MainAsset extends AssetBundle
 
     // дополнительные зависимости для подгрузки
     public $depends = [
-        'yii/web/YiiAsset', // yii.js, jquery это тянется через зависимости
-        'yii/bootstrap/BootstrapAsset', // bootstrap.css
-        'yii/bootstrap/BootstrapPluginAsset' // bootstrap.js
+        'yii\web\YiiAsset', // yii.js, jquery это тянется через зависимости
+        'yii\bootstrap\BootstrapAsset', // bootstrap.css
+        'yii\bootstrap\BootstrapPluginAsset' // bootstrap.js
     ];
 
     // настройки в какую часть страницы подключать js скрипты
     public $jsOptions = [
-        'position' => View::POS_HEAD // непонятно что это
+        //'position' => View::POS_HEAD // непонятно что это
     ];
 }
