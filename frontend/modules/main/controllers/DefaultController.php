@@ -62,5 +62,5 @@ class DefaultController extends Controller
         // @frontend - указывает непосредственно на frondend папку
         // @backend - указывает на соответствующую папку
         // print \Yii::getAlias('@webroot');
-        
+    }
 }

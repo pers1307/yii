@@ -2,6 +2,7 @@
 
 namespace app\modules\main\controllers;
 
+use frontend\models\ContactForm;
 use frontend\models\Image;
 use frontend\models\SignupForm;
 use yii\widgets\ActiveForm;
@@ -10,6 +11,24 @@ class MainController extends \yii\web\Controller
 {
     //public $layout = "bootstrap";
     public $layout = "inner";
+
+    public function actions()
+    {
+        return [
+            // Имя экшена по которому будем обращаться
+            'captcha' => [
+                'class' => 'yii\captcha\CaptchaAction',
+                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+            ],
+            /*
+             * // подключение стороннего Action'а в наш
+            'test' => [
+                'class' => 'frontend\actions\TestAction',
+                'viewName' => 'test1'
+            ]
+            */
+        ];
+    }
 
     public function actionIndex()
     {
@@ -48,7 +67,10 @@ class MainController extends \yii\web\Controller
 
     public function actionContact()
     {
+        $model = new ContactForm();
 
+        //return $this->render('contact', ['model']);
+        //return $this->render('inner');
     }
 
     /**

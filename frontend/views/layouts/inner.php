@@ -5,8 +5,8 @@ use \yii\bootstrap\Html;
 ?>
 
 <meta charset="<?= Yii::$app->charset ?>">
-<?= Html::csrfMetaTags() // Отправка какого то кода при приеме формы ?>
-<? $this->head() // здесь будут подключаться все js и css файлы ?>
+<?//= Html::csrfMetaTags() // Отправка какого то кода при приеме формы ?>
+<? $this->head()  //здесь будут подключаться все js и css файлы ?>
 
     <title><?= $this->title ?></title>
 
