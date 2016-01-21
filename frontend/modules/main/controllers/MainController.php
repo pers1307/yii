@@ -15,13 +15,14 @@ class MainController extends \yii\web\Controller
     public function actions()
     {
         return [
-            // Имя экшена по которому будем обращаться
+            // Р�РјСЏ СЌРєС€РµРЅР° РїРѕ РєРѕС‚РѕСЂРѕРјСѓ Р±СѓРґРµРј РѕР±СЂР°С‰Р°С‚СЊСЃСЏ
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
+
             /*
-             * // подключение стороннего Action'а в наш
+             * // РїРѕРґРєР»СЋС‡РµРЅРёРµ СЃС‚РѕСЂРѕРЅРЅРµРіРѕ Action'Р° РІ РЅР°С€
             'test' => [
                 'class' => 'frontend\actions\TestAction',
                 'viewName' => 'test1'
@@ -30,6 +31,7 @@ class MainController extends \yii\web\Controller
         ];
     }
 
+    // http://yii.loc/frontend/web/main/main
     public function actionIndex()
     {
         //$urlImage = Image::getImageUrl();
@@ -41,7 +43,7 @@ class MainController extends \yii\web\Controller
 
         //return $this->render('index');
 
-        echo '3 vidio 58:10';
+        echo '3 vidio 1:05:00';
 
         return $this->render('inner');
     }
@@ -50,6 +52,7 @@ class MainController extends \yii\web\Controller
     public function actionRegister()
     {
         $model = new SignupForm;
+        $model->scenario = 'short_register';
 
         if (\Yii::$app->request->isAjax && \Yii::$app->request->isPost) {
             \Yii::$app->response->format = Response::FORMAT_JSON;
@@ -68,8 +71,19 @@ class MainController extends \yii\web\Controller
     public function actionContact()
     {
         $model = new ContactForm();
+        if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
 
-        //return $this->render('contact', ['model']);
+            $body = '<div>Body: <b>' . $model->body . ' </b></div>';
+            $body .= '<div>Email: <b>' . $model->email . ' </b></div>';
+
+            \Yii::$app->common->sendMail($model->subject, $body);
+
+            print 'Send success';
+        }
+
+
+
+        return $this->render('contact', ['model']);
         //return $this->render('inner');
     }
 

@@ -13,6 +13,7 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'defaultRoute' => 'main', // открытие контроллера по умолчанию
 
     'modules' => [
         'main' => [
@@ -32,8 +33,10 @@ return [
                 'port'       => '465',
                 'smtpsecure' => 'ssl',
                 'smtpauth'   => true,
-                'username'   => '', // здесь для каждого прописываются свои настройки
-                'password'   => '', // ну и пароль соответственно
+                'username'   => 'skulines@mail.ru', // здесь для каждого прописываются свои настройки
+                'password'   => '13079999', // ну и пароль соответственно
+                'ishtml'     => true,
+                'charset'    => 'UTF-8',
             ],
         ],
 
