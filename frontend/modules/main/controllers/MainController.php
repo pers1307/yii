@@ -5,6 +5,7 @@ namespace app\modules\main\controllers;
 use frontend\models\ContactForm;
 use frontend\models\Image;
 use frontend\models\SignupForm;
+use yii\web\Response;
 use yii\widgets\ActiveForm;
 
 class MainController extends \yii\web\Controller
@@ -43,7 +44,7 @@ class MainController extends \yii\web\Controller
 
         //return $this->render('index');
 
-        echo '3 vidio 1:05:00';
+        echo '4 vidio 1:05:00';
 
         return $this->render('inner');
     }
@@ -55,14 +56,18 @@ class MainController extends \yii\web\Controller
         $model->scenario = 'short_register';
 
         if (\Yii::$app->request->isAjax && \Yii::$app->request->isPost) {
-            \Yii::$app->response->format = Response::FORMAT_JSON;
-            return ActiveForm::validate($model);
+            if ($model->load(\Yii::$app->request->post())) {
+                //\Yii::$app->response->format = Response::FORMAT_JSON;
+                \Yii::$app->response->format = Response::FORMAT_JSON;
+                return ActiveForm::validate($model);
+            }
         }
 
-        if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
+        if ($model->load(\Yii::$app->request->post()) && $model->signup()) {
 
-            print_r($model->getAttributes());
-            die;
+            \Yii::$app->session->setFlash('success', 'Register Success');
+            //print_r($model->getAttributes());
+            //die;
 
         }
         return $this->render('register', ['model' => $model]);
@@ -95,4 +100,10 @@ class MainController extends \yii\web\Controller
         echo '!!!';
     }
 
+    public function actionLogin()
+    {
+        //$model =
+
+        return $this->render('login');
+    }
 }
