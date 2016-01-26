@@ -2,6 +2,7 @@
 
 namespace app\modules\main\controllers;
 
+use common\models\LoginForm;
 use frontend\models\ContactForm;
 use frontend\models\Image;
 use frontend\models\SignupForm;
@@ -44,7 +45,7 @@ class MainController extends \yii\web\Controller
 
         //return $this->render('index');
 
-        echo '4 vidio 1:05:00';
+        echo '5 vidio ::00';
 
         return $this->render('inner');
     }
@@ -100,10 +101,23 @@ class MainController extends \yii\web\Controller
         echo '!!!';
     }
 
+    // http://yii.loc/frontend/web/main/main/login
     public function actionLogin()
     {
-        //$model =
+        $model = new LoginForm();
 
-        return $this->render('login');
+        if ($model->load(\Yii::$app->request->post()) && $model->login()) {
+            $this->goBack();
+        }
+
+        return $this->render('login', ['model' => $model]);
+    }
+
+    // http://yii.loc/frontend/web/main/main/logout
+    public function actionLogout()
+    {
+        \Yii::$app->user->logout();
+
+        return $this->goHome();
     }
 }

@@ -19,6 +19,9 @@ return [
         'main' => [
             'class' => 'app\modules\main\Module',
         ],
+        'cabinet' => [
+            'class' => 'app\modules\cabinet\module',
+        ],
     ],
 
     'components' => [
@@ -47,6 +50,7 @@ return [
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
+            'loginUrl' => '/main/main/login' // редирект, если пользователь не авторизован
         ],
 
         'log' => [

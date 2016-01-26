@@ -63,4 +63,12 @@ class DefaultController extends Controller
         // @backend - указывает на соответствующую папку
         // print \Yii::getAlias('@webroot');
     }
+
+    public function actionLoginData()
+    {
+        print \Yii::$app->user->id;
+        print \Yii::$app->user->identity->getId();
+        print \Yii::$app->user->identity->email;
+        print \Yii::$app->user->identity->username;
+    }
 }

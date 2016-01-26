@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50538
 File Encoding         : 65001
 
-Date: 2016-01-22 11:56:56
+Date: 2016-01-26 17:25:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,7 +23,7 @@ CREATE TABLE `advert` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `price` mediumint(11) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
-  `fk_agent_detail` mediumint(11) DEFAULT NULL,
+  `fk_agent` mediumint(11) DEFAULT NULL,
   `bedroom` smallint(1) DEFAULT NULL,
   `livingroom` smallint(1) DEFAULT NULL,
   `parking` smallint(1) DEFAULT NULL,
