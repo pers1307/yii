@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use common\models\User;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -59,6 +60,14 @@ class Advert extends \yii\db\ActiveRecord
         ];
     }
 
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios['step2'] = ['general_image'];
+
+        return $scenarios;
+    }
+
     /**
      * @inheritdoc
      */
@@ -68,7 +77,7 @@ class Advert extends \yii\db\ActiveRecord
             'id' => 'ID',
             'price' => 'Price',
             'address' => 'Address',
-            'fk_agent_detail' => 'Fk Agent Detail',
+            'fk_agent' => 'Fk Agent Detail', // user.email ???
             'bedroom' => 'Bedroom',
             'livingroom' => 'Livingroom',
             'parking' => 'Parking',
@@ -83,6 +92,11 @@ class Advert extends \yii\db\ActiveRecord
             'createAt' => 'Create At',
             'ipdatedAt' => 'Ipdated At',
         ];
+    }
+
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'fk_agent']);
     }
 
     // beforeValidate

@@ -4,6 +4,7 @@ namespace app\modules\main\controllers;
 
 use frontend\component\Common;
 use yii\web\Controller;
+use yii\db\Query;
 
 class DefaultController extends Controller
 {
@@ -12,9 +13,39 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        //$this->layout = "bootstrap";
+        $this->layout = "bootstrap";
 
-        $this->layout = "inner";
+        $query = new Query();
+        $query_advert = $query->from('advert')->orderBy('id desc');
+        $command = $query_advert->limit(5);
+        $result_general = $command->all();
+        $count_general = $command->count();
+
+        $featured = $query_advert->limit(15)->all();
+        $recommend_query = $query_advert->where('recommend = 1')->limit(5);
+        $recommend = $recommend_query->all();
+        $recommend_count = $recommend_query->count();
+
+        return $this->render('index', [
+            'result_general' => $result_general,
+            'count_general' => $count_general,
+            'featured' => $featured,
+            'recommend' => $recommend,
+            'recommend_count' => $recommend_count
+        ]);
+
+
+
+
+        /*
+        $command = $query->from('advert')->orderBy('id desc')->limit(5);
+        $result_general = $command->all();
+        $count_general = $command->count();
+
+        return $this->render('index', ['result_general' => $result_general, 'count_general' => $count_general]);
+        */
+
+        //$this->layout = "inner";
 
         /*
         $locator = \Yii::$app->locator;
@@ -25,7 +56,7 @@ class DefaultController extends Controller
         print $cache->get('test');
         */
 
-        return $this->render('index');
+        //return $this->render('index');
     }
 
     public function actionService()
@@ -70,5 +101,13 @@ class DefaultController extends Controller
         print \Yii::$app->user->identity->getId();
         print \Yii::$app->user->identity->email;
         print \Yii::$app->user->identity->username;
+    }
+
+    public function actionCacheTest()
+    {
+        //$locator = \Yii::$app->locator;
+        //$locator->cache->set('test', 1);
+
+        //print $locator->cache->get('test');
     }
 }

@@ -3,13 +3,18 @@
 namespace app\modules\cabinet\controllers;
 
 use common\controllers\AuthController;
+use Imagine\Image\Box;
+use Imagine\Image\Point;
 use Yii;
 use app\models\Advert;
 use frontend\models\Search\AdvertSearch;
+use yii\helpers\BaseFileHelper;
 use yii\helpers\Url;
+use yii\imagine\Image;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * AdvertController implements the CRUD actions for Advert model.
@@ -47,7 +52,36 @@ class AdvertController extends AuthController
 
     public function actionFileUploadGeneral()
     {
-        
+        if (Yii::$app->request->isPost) {
+            $id = Yii::$app->request->post('id');
+            $path = Yii::getAlias('@frontend/web/uploads/adverts/' . $id . '/general');
+            BaseFileHelper::createDirectory($path);
+            $model = Advert::findOne($id);
+            $model->scenario = 'step2';
+
+            $file = UploadedFile::getInstance($model, 'general_image');
+            $name = 'general.' . $file->extension;
+            $file->saveAs($path . DIRECTORY_SEPARATOR . $name);
+
+            $image = $path . DIRECTORY_SEPARATOR . $name;
+            $new_name = $path . DIRECTORY_SEPARATOR . $name;
+
+            $model->general_image = $name;
+            $model->save();
+
+            $size = getimagesize($image);
+            $width = $size[0];
+            $height = $size[1];
+
+            Image::frame($image, 0, '666', 0)
+                ->crop(new Point(0, 0), new Box($width, $height))
+                ->resize(new Box(1000, 644))
+                ->save($new_name, ['quality' => 100]);
+
+            sleep(1);
+
+            return true;
+        }
     }
 
     /**
@@ -81,6 +115,9 @@ class AdvertController extends AuthController
         }
     }
 
+    /**
+     *
+     */
     public function actionStep2()
     {
         $id = Yii::$app->locator->cache->get('id');

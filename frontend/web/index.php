@@ -16,7 +16,8 @@ $config = yii\helpers\ArrayHelper::merge(
 
 // Это входной скрипт!
 $service = new \yii\di\ServiceLocator();
-$service->set('cache', 'yii\caching\FileCache'); // А можно также добавлять и свои классы!
+//$service->set('cache', 'yii\caching\FileCache'); // А можно также добавлять и свои классы!
+$service->set('cache', 'common\cache\Base64Cache'); // А можно также добавлять и свои классы!
 
 $application = new yii\web\Application($config);
 //$application->set('locator', 'yii\caching\FileCache');

@@ -18,7 +18,7 @@ class AdvertSearch extends Advert
     public function rules()
     {
         return [
-            [['id', 'price', 'fk_agent_detail', 'bedroom', 'livingroom', 'parking', 'kitchen', 'hot', 'sold', 'recommend', 'createAt', 'ipdatedAt'], 'integer'],
+            [['id', 'price', 'fk_agent', 'bedroom', 'livingroom', 'parking', 'kitchen', 'hot', 'sold', 'recommend', 'createAt', 'ipdatedAt'], 'integer'],
             [['address', 'general_image', 'description', 'location', 'type'], 'safe'],
         ];
     }
@@ -58,7 +58,7 @@ class AdvertSearch extends Advert
         $query->andFilterWhere([
             'id' => $this->id,
             'price' => $this->price,
-            'fk_agent_detail' => $this->fk_agent_detail,
+            'fk_agent' => $this->fk_agent,
             'bedroom' => $this->bedroom,
             'livingroom' => $this->livingroom,
             'parking' => $this->parking,
