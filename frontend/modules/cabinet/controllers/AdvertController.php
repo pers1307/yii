@@ -23,6 +23,11 @@ class AdvertController extends AuthController
 {
     public $layout = 'inner';
 
+    public function init()
+    {
+        Yii::$app->view->registerJsFile('', []);
+    }
+
     public function behaviors()
     {
         return [
